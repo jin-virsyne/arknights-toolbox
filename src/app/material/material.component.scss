@@ -1,0 +1,107 @@
+@import "../styles/custom.scss";
+[mdcDialog] {
+  color: var(--mdc-theme-text-primary-on-background);
+
+  .mdc-dialog__body,
+  a {
+    color: var(--mdc-theme-text-secondary-on-background);
+  }
+
+  [mdcButton] {
+    &:hover {
+      color: var(--mdc-theme-on-primary);
+      background-color: var(--mdc-theme-primary);
+    }
+  }
+  [mdcDialogCancel],
+  [mdcDialogAccept] {
+    color: var(--mdc-theme-on-surface);
+  }
+}
+.options-box {
+  padding: 0.5em 1em;
+}
+.padding-025 {
+  padding: 0.25em;
+}
+
+h4 {
+  margin: 0.25em 0;
+}
+section {
+  max-height: 60vh;
+  height: 60vh;
+  
+}
+.mdc-list-item {
+  height: fit-content;
+  padding: 0.25em 0;
+}
+#btnReset,
+#btnResetNeed {
+  background-color: $color-1;
+}
+.sepatator {
+  height: 0.5em;
+  width: 10em;
+}
+
+[mdcTextField] {
+  textarea {
+    color: $color-muted;
+    background-color: rgba($color-dark, 0.1);
+    resize: none;
+    // border-color: $color-primary;
+  }
+}
+
+.mdc-text-field__input {
+  padding: 0.25em 0.75em;
+  font-size: small;
+}
+
+.dialog-data {
+  max-width: 600px;
+  max-height: 600px;
+}
+.hint {
+  line-height: 0.5em;
+}
+#btnPlan {
+    background: var(--mdc-theme-secondary);
+    color: var(--mdc-theme-background);
+}
+#dialog-calc {
+    font-size: 0.9em;
+}
+#dialog-calc sub {
+    font-style: italic;
+}
+
+.stage-item, .syn-item {
+    border: 1px solid var(--mdc-theme-background);
+    background-color: rgba(144,144,144,0.5);
+    color: var(--mdc-theme-primary);
+}
+.stage-item .stage {
+    padding-left: 5px;
+    padding-right: 5px;
+    min-width: 70px;
+}
+.syn-item .syn {
+    min-width: 90px;
+}
+.stage-item .item, .syn-item .item {
+    flex-wrap: wrap;
+    background-color: rgba(82,82,82,0.5);
+    width: 100%;
+    padding: 5px 5px 0px 0px;
+}
+.stage-item .item span, .syn-item .item span {
+    white-space: nowrap;
+}
+.img-route-icon {
+    width: auto;
+    height: 40px;
+    margin-left: 10px;
+}

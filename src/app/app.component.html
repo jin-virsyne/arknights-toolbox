@@ -1,0 +1,58 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<aside [mdcDrawerContainer]="temporary" [(open)]="drawerOpen">
+  <nav mdcDrawer (click)="toggleDrawer()">
+    <!-- <div mdcDrawerToolbarSpacer>
+      <a mdcToolbarTitle class="router-active" routerLink="/">明日方舟工具箱</a>
+    </div> -->
+    <div mdcDrawerHeader>
+      <div mdcDrawerHeaderContent>
+        <div fxLayout="row" class="drawer-header">
+          <div fxLayout="column" fxLayoutAlign="space-around end">
+            <div>
+              <a mdcToolbarTitle class="router-active" routerLink="/">Arknight Toolbox</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div mdcDrawerContent mdcListGroup>
+      <nav mdcList>
+        <a mdcListItem routerLink="/material">
+          <i mdcListItemGraphic class="material-icons" aria-hidden="true">add_shopping_cart</i>Material Planner
+        </a>
+        <a mdcListItem routerLink="/charmat">
+          <i mdcListItemGraphic class="material-icons" aria-hidden="true">nature_people</i>Operator Planner
+        </a>
+      </nav>
+    </div>
+    <div id="aside-logo"><img src="https://vynli.com/wp-content/uploads/2020/02/fr2_20191213_001944.png" width="60%" /></div>
+  </nav>
+</aside>
+<header mdcToolbar *ngIf="showNavbar">
+  <div mdcToolbarRow>
+    <section mdcToolbarSection alignStart shrinkToFit>
+      <div mdcToolbarRow>
+        <a mdcToolbarIcon class="material-icons" (click)="toggleDrawer()">menu</a>
+        <div fxLayout="row" fxShow="false" fxShow.gt-md="true" class="toolbar-titles">
+          <span><a mdcToolbarTitle routerLink="/material" routerLinkActive="router-active">Material Planner</a></span>
+          <span><a mdcToolbarTitle routerLink="/charmat" routerLinkActive="router-active">Operator Planner</a></span>
+        </div>
+      </div>
+    </section>
+    <section mdcToolbarSection alignEnd>
+      <a mdcToolbarIcon class="material-icons" aria-label="Back to Home" alt="Back to Home" title="Back to Home" href="https://vynli.com/arknights-toolbox/">home</a>
+      <a mdcToolbarIcon class="material-icons" aria-label="Dark Mode" alt="Dark Mode" title="Dark Mode"
+        (click)="toggleTheme()">brightness_2</a>
+      <a mdcToolbarIcon class="material-icons" aria-label="Update" alt="Update" title="Update"
+        (click)="doUpdate()">update</a>
+      <a mdcToolbarIcon class="material-icons" aria-label="Info" alt="Info" title="Info"
+        routerLink="/">info</a>
+      <a mdcToolbarIcon class="material-icons" routerLink="/settings" aria-label="Settings" alt="Settings"
+        title="Settings">settings</a>
+    </section>
+  </div>
+</header>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

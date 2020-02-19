@@ -1,0 +1,155 @@
+<aside #dialogPlan="mdcDialog" mdcDialog mdcFocusTrap>
+    <div mdcDialogSurface>
+        <header mdcDialogHeader>
+            <h3 mdcDialogHeaderTitle>Farming Route（Purely for reference）</h3><br />
+        </header>
+        <section mdcDialogBody scrollable>
+            <div fxLayout="column">
+
+                <div fxLayout="row" fxFlex="100" fxLayoutGap="2%" fxLayoutAlign="start center">
+                    <div mdcFormField>
+                        <div mdcSwitch>
+                            <input mdcSwitchInput type="checkbox" [(ngModel)]="request.extra_outc" />
+                        </div>
+                        <label mdcFormFieldLabel>Include Byproduct %</label>
+                    </div>
+                    <div mdcFormField>
+                        <div mdcSwitch>
+                            <input mdcSwitchInput type="checkbox" [(ngModel)]="request.exp_demand" />
+                        </div>
+                        <label mdcFormFieldLabel>More EXP</label>
+                    </div>
+                    <div mdcFormField>
+                        <div mdcSwitch>
+                            <input mdcSwitchInput type="checkbox" [(ngModel)]="request.gold_demand" />
+                        </div>
+                        <label mdcFormFieldLabel>Lesser Crafting Cost</label>
+                    </div>
+                    <div>
+                        <button mdcButton raised dense (click)="plan()">Re-Plan</button>
+                    </div>
+                </div>
+                <div id="dialog-calc">
+                    Estimated Sanity Consumption：<strong>{{cost}}</strong><br />
+                    Estimated Crafting Cost: <strong>{{synsCost}}</strong><br />
+                    <sub>Disclaimer: Results shown are approximations based on the probabilities contributed by the CN community.</sub><br />
+                </div>
+                <ng-container *ngIf="stagesText.length!==0">
+                    <h4>Suggested Maps</h4>
+                    <sub>CN maps will be included as of now due to limitation from Penguin Statistic. Please refer <a href="https://arkonegraph.herokuapp.com/" style="color:#1fa8db">here</a> for alternate routes.</sub>
+                    <ul mdcList>
+                        <li mdcListItem class="stage-item" *ngFor="let st of stagesText">
+                            <div class="stage">[{{st.stage}}] x{{st.count}}</div><div class="item"><span *ngFor="let item of st.items"><img class="img-route-icon" src="./assets/img/material/{{item[0]}}.png" /> x{{item[1]}}</span></div>
+                        </li>
+                    </ul>
+                </ng-container>
+                <ng-container *ngIf="synsText.length!==0">
+                    <h4>Crafting Route</h4>
+                    <ul mdcList>
+                        <li mdcListItem class="syn-item" *ngFor="let sy of synsText">
+                            <div class="syn"><img class="img-route-icon" src="./assets/img/material/{{sy.stage}}.png" /> x{{sy.count}}</div><div class="item"><span *ngFor="let item of sy.items"><img class="img-route-icon" src="./assets/img/material/{{item[0]}}.png" /> x{{item[1]}}</span></div>
+                        </li>
+                    </ul>
+                </ng-container>
+
+            </div>
+        </section>
+        <footer mdcDialogFooter>
+            <button mdcButton mdcDialogCancel>Close</button>
+            <!--      <button mdcButton mdcDialogAccept (click)="copyResult()">Copy</button>-->
+        </footer>
+    </div>
+    <div mdcDialogBackdrop></div>
+</aside>
+<aside #dialogData="mdcDialog" mdcDialog mdcFocusTrap>
+    <div mdcDialogSurface class="dialog-data">
+        <section mdcDialogBody>
+            <div fxLayout="column" fxLayoutAlign="start center">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <div>
+                        <button mdcButton raised dense id="btnReset" (click)="reset(false)">Reset</button>
+                    </div>
+                    <div>
+                        <button mdcButton raised dense id="btnResetNeed" (click)="reset(true)">Reset Needs</button>
+                    </div>
+                    <div>
+                        <button mdcButton mdcDialogCancel>Close</button>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <div mdcTextField [dense]="true">
+                        <textarea mdcTextFieldInput type="text" rows="5" cols="60" #input1="ngModel"
+                                  [(ngModel)]="exportedData"></textarea>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <button mdcButton raised dense id="btnExport" (click)="copyExport()">Copy</button>
+                    </div>
+                </div>
+                <div fxLayout="row" class="hint" fxLayoutAlign="center center">
+                    <p><small>If there's no successful message prompt, please copy manually.</small></p>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <div mdcTextField [dense]="true">
+                        <textarea mdcTextFieldInput type="text" rows="5" cols="60" #input1="ngModel"
+                                  [(ngModel)]="importedData"></textarea>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <button mdcButton raised dense id="btnImport" (click)="getImportedData()">Import</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div mdcDialogBackdrop></div>
+</aside>
+<div fxLayout="row wrap" fxLayoutAlign="center center">
+    <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-sm="100" fxLayoutAlign="center" fxLayoutGap="1%"
+         class="options-box">
+            <div mdcFormField>
+                <div mdcSwitch>
+                    <input mdcSwitchInput type="checkbox" [(ngModel)]="options.showOnly3plus" (change)="onOptionChange()" />
+                </div>
+                <label mdcFormFieldLabel>3★ and above</label>
+            </div>
+            <div mdcFormField>
+                <div mdcSwitch>
+                    <input mdcSwitchInput type="checkbox" [(ngModel)]="options.filtered" (change)="onOptionChange()" />
+                </div>
+                <label mdcFormFieldLabel>Filter</label>
+            </div>
+        <div mdcFormField>
+            <div mdcSwitch>
+                <input mdcSwitchInput type="checkbox" [(ngModel)]="options.showMat" (change)="onOptionChange()" />
+            </div>
+            <label mdcFormFieldLabel>Elite Material</label>
+        </div>
+        <div mdcFormField>
+            <div mdcSwitch>
+                <input mdcSwitchInput type="checkbox" [(ngModel)]="options.showBook" (change)="onOptionChange()" />
+            </div>
+            <label mdcFormFieldLabel>Skill Book</label>
+        </div>
+        <div mdcFormField>
+            <div mdcSwitch>
+                <input mdcSwitchInput type="checkbox" [(ngModel)]="options.showChip" (change)="onOptionChange()" />
+            </div>
+            <label mdcFormFieldLabel>Chips</label>
+        </div>
+    </div>
+    <div fxLayout="row wrap" fxFlex="100" fxFlex.gt-xs="100" fxLayoutAlign="center">
+        <div mdcFormField>
+            <!-- <button mdcButton raised dense id="btnReset" (click)="reset()">重置</button> -->
+            <button mdcButton raised dense id="btnData" (click)="dialogData.open()">Data Options</button>
+            <button mdcButton raised dense id="btnPlan" (click)="plan();dialogPlan.open()">Plan Route</button>
+        </div>
+    </div>
+    <div fxLayout="row wrap" fxFlex="100" fxLayoutAlign="start start">
+        <ng-container *ngFor="let item of items; trackBy:trackItem">
+            <div fxFlex="50" fxFlex.gt-xs="33" fxFlex.gt-sm="25" fxFlex.gt-md="16" class="padding-025"
+                 [hidden]="((options.filtered && !data[item.name].need && !data[item.name].lack)||(options.showOnly3plus && item.id.startsWith('30') && item.rarity<3)||(!options.showMat && (item.id.startsWith('30') || item.id.startsWith('31')))||(!options.showBook && item.id.startsWith('33'))||(!options.showChip && item.id.startsWith('32')))">
+                <app-material-card [item]="item" [itemdata]="data[item.name]" (dataChange)="onDataChange($event)"
+                                   (reportMerge)="onMatMerge($event)"></app-material-card>
+            </div>
+        </ng-container>
+    </div>
+</div>

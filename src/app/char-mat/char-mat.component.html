@@ -1,0 +1,56 @@
+<div fxLayout="row wrap">
+  <div fxFlex="100" fxFlex.gt-sm="70%" ngClass.gt-sm="padding-x-1" fxLayout="row wrap" fxLayoutAlign="space-between start">
+    <div fxFlex="26">
+      <div mdcSelect class="input-field">
+        <select mdcSelectControl [(ngModel)]="star" (change)="onFilterChange()">
+          <option value="0" class="tpob" selected>All</option>
+          <option value="6" class="tpob">6★</option>
+          <option value="5" class="tpob">5★</option>
+          <option value="4" class="tpob">4★</option>
+          <option value="3" class="tpob">3★</option>
+          <option value="2" class="tpob">2★</option>
+          <option value="1" class="tpob">1★</option>
+        </select>
+        <label mdcFloatingLabel class="mdc-floating-label--float-above">Rarity</label>
+      </div>
+    </div>
+    <div fxFlex="26">
+      <div mdcSelect class="input-field">
+        <select mdcSelectControl [(ngModel)]="prof" (change)="onFilterChange()">
+          <option value="全部" class="tpob" selected>All</option>
+          <option value="Support" class="tpob">Supporter</option>
+          <option value="Warrior" class="tpob">Guard</option>
+          <option value="Pioneer" class="tpob">Vanguard</option>
+          <option value="Special" class="tpob">Specialist</option>
+          <option value="Tank" class="tpob">Defender</option>
+          <option value="Caster" class="tpob">Caster</option>
+          <option value="Sniper" class="tpob">Sniper</option>
+          <option value="Medic" class="tpob">Medic</option>
+        </select>
+        <label mdcFloatingLabel class="mdc-floating-label--float-above">Class</label>
+      </div>
+    </div>
+    <div fxFlex="26">
+      <div mdcSelect class="input-field">
+        <select mdcSelectControl [(ngModel)]="char">
+          <option value="{{ch}}" class="tpob" *ngFor="let ch of joindChars">{{ch}}</option>
+        </select>
+        <label mdcFloatingLabel class="mdc-floating-label--float-above">Operator</label>
+      </div>
+    </div>
+    <div>
+      <div mdcInputField>
+        <button mdcIconButton class="material-icons" (click)="onCharAdd()">add</button>
+      </div>
+    </div>
+    <div fxFlex="100">
+      <div *ngFor="let chn of selectedChars">
+        <app-char-mat-charcard [char]="cmMap[chn]" (reportRemove)="onCharRemove($event)"
+          (reportMats)="onMatReport($event)"></app-char-mat-charcard>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="100" fxFlex.gt-sm="30%" ngClass.gt-sm="padding-x-1" fxLayout="row" fxLayoutAlign="center start">
+    <app-char-mat-matcard [allmats]="mats" [smats]="summarizedMats"></app-char-mat-matcard>
+  </div>
+</div>
