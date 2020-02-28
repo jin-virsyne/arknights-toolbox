@@ -38,7 +38,8 @@ export class MaterialComponent implements OnInit {
     required: null, 
     exp_demand: false, 
     extra_outc: false, 
-    gold_demand: true
+    gold_demand: true,
+    exclude: []
   }
 
   calc(): void {
@@ -206,6 +207,7 @@ export class MaterialComponent implements OnInit {
     }
     this.request.owned=owned;
     this.request.required=required;
+    this.request.exclude=["6-1","6-2","6-3","6-4","6-5","6-6","6-7","6-8","6-9","6-10","6-11","6-12","6-13","6-14","6-15","6-16","6-17","6-18","S3-6","S4-10","S5-7","S5-8","S6-1","S6-2","S6-3","S6-4","SA-1","SA-2","SA-3","SA-4","SA-5","SA-6"];
     this.planResult = this.fetchService.postJson('https://planner.penguin-stats.io/plan/',
       this.request)
       .subscribe(plan => {
