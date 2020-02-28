@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AutoDetectHashComponent } from './auto-detect-hash.component';
 
-describe('AutoDetectComponent', () => {
+describe('AutoDetectHashComponent', () => {
   let component: AutoDetectHashComponent;
   let fixture: ComponentFixture<AutoDetectHashComponent>;
 
