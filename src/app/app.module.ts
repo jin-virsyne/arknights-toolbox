@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms'; // (optional)
 import { MaterialModule } from '@blox/material';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +24,8 @@ import { CharMatMatcardComponent } from './char-mat-matcard/char-mat-matcard.com
 import { SettingsComponent } from './settings/settings.component';
 import { AutoDetectComponent } from './auto-detect/auto-detect.component';
 import { AutoDetectHashComponent } from './auto-detect-hash/auto-detect-hash.component';
+import { DetectSetttingComponent } from './detect-setting/detect-setting.component';
+import { StageChooserComponent } from './stage-chooser/stage-chooser.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import { AutoDetectHashComponent } from './auto-detect-hash/auto-detect-hash.com
     CharMatMatcardComponent,
     SettingsComponent,
     AutoDetectComponent,
-    AutoDetectHashComponent
+    AutoDetectHashComponent,
+    DetectSetttingComponent,
+    StageChooserComponent
   ],
   imports: [
     BrowserModule,
@@ -54,9 +57,7 @@ import { AutoDetectHashComponent } from './auto-detect-hash/auto-detect-hash.com
     ClipboardModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [
-    {provide : LocationStrategy , useClass: HashLocationStrategy}
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
