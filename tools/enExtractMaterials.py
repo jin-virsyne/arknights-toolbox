@@ -17,10 +17,10 @@ def save_json(name: str, data: dict):
 def parse_operators():
     operator_table = {}
 
-    cn_operators = load_json('AKTools/game_data/zh-CN/gamedata/excel/character_table.json')
-    en_operators = load_json('AKTools/game_data/en-US/gamedata/excel/character_table.json')
-    cn_skills = load_json('AKTools/game_data/zh-CN/gamedata/excel/skill_table.json')
-    en_skills = load_json('AKTools/game_data/en-US/gamedata/excel/skill_table.json')
+    cn_operators = load_json('game_data/zh-CN/character_table.json')
+    en_operators = load_json('game_data/en-US/character_table.json')
+    cn_skills = load_json('game_data/zh-CN/skill_table.json')
+    en_skills = load_json('game_data/en-US/skill_table.json')
 
     for id, data in cn_operators.items():
         # Let's ignore traps and such.
@@ -55,13 +55,13 @@ def parse_operators():
 def parse_items():
     items_table = {}
 
-    cn_items = load_json('AKTools/game_data/zh-CN/gamedata/excel/item_table.json')
-    en_items = load_json('AKTools/game_data/en-US/gamedata/excel/item_table.json')
+    cn_items = load_json('game_data/zh-CN/item_table.json')
+    en_items = load_json('game_data/en-US/item_table.json')
 
-    cn_stages = load_json('AKTools/game_data/zh-CN/gamedata/excel/stage_table.json')
-    en_stages = load_json('AKTools/game_data/en-US/gamedata/excel/stage_table.json')
+    cn_stages = load_json('game_data/zh-CN/stage_table.json')
+    en_stages = load_json('game_data/en-US/stage_table.json')
 
-    cn_building_data = load_json('AKTools/game_data/zh-CN/gamedata/excel/building_data.json')
+    cn_building_data = load_json('game_data/zh-CN/building_data.json')
 
     for id, data in cn_items['items'].items():
         if id.startswith('p_') or id.startswith('tier'):
@@ -123,10 +123,10 @@ def parse_items():
 
 def main():
     operators = parse_operators()
-    save_json('operators.json', operators)
+    save_json('charMaterials.json', operators)
 
     items = parse_items()
-    save_json('items.json', items)
+    save_json('material.json', items)
 
 if __name__ == '__main__':
     main()
