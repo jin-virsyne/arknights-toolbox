@@ -66,8 +66,8 @@
         "cn_name": "破损装置",
         "rarity": 1,
         "source": {
-            "2-3": "ALWAYS",
-            "1-5": "USUAL"
+            "1-5": "USUAL",
+            "2-3": "ALWAYS"
         },
         "madeof": {},
         "icon": "MTL_SL_BOSS1",
@@ -313,8 +313,8 @@
         "cn_name": "双酮",
         "rarity": 1,
         "source": {
-            "1-6": "ALMOST",
-            "S2-9": "ALWAYS"
+            "S2-9": "ALWAYS",
+            "1-6": "ALMOST"
         },
         "madeof": {},
         "icon": "MTL_SL_KETONE1",
